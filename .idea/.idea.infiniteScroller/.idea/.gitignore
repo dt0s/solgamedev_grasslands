@@ -1,0 +1,13 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/projectSettingsUpdater.xml
+/contentModel.xml
+/.idea.infiniteScroller.iml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../../../../:\Users\deniz\dev\unity\infiniteScroller\.idea\.idea.infiniteScroller\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

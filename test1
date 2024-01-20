@@ -1,0 +1,94 @@
+''
+' File Name Serena_Network_R_D_E_PLEX_AutomatedInstaller.vbs
+'
+' Description Creates RPlex server with Changeman and filters for SWIDs B59, EBA, EBD, EBC, EBE, H3L, JYY, KWY
+'              Creates DPlex server
+'              Creates EPlex server
+'
+' Usage ChangeMan ZDD configuration
+'
+'
+Dim network
+Dim servers
+Dim server
+Dim cmanInst
+Dim thisCman
+Dim applFilters
+Dim nameRPlex
+Dim descriptionRPlex
+Dim nameDPlex
+Dim descriptionDPlex
+Dim nameEPlex
+Dim descriptionEPlex
+Dim nameChangeman
+Dim descriptionChangeman
+'-----------------------
+' Update network properties
+'-----------------------
+Set network = CreateObject(ZosCom.ZosNetwork)
+network.CacheFolder = CProgramDataMicro FocusChangeMan ZDD
+network.CacheDays = 1
+network.NotifyPort = 8100
+network.NotifyMessageBox = True
+network.NotifyDelay = 20
+'-----------------------
+' Add the RPlex server
+'-----------------------
+nameRPlex = RPlex
+descriptionRPlex = RPlex
+Set servers = network.Servers
+Set server = servers.Add(nameRPlex, rplex1-cmanq.rdns.ubs.net, 7900, 1047,descriptionRPlex, 6)
+'-----------------------
+' Add ChangeMan to RPlex server
+'-----------------------
+nameChangeman = Changeman
+descriptionChangeman = Changeman RPlex
+Set cmanInst = server.ChangeManInstances
+cmanInst.Add nameChangeman, 7600, descriptionChangeman
+'-----------------------
+' Add filters to Application folder
+'-----------------------
+Set thisCman = cmanInst.Item(0)
+Set applFilters = thisCman.Filters
+' Insert a new line applFilter.Add SWID for each SWID that you want to filter
+applFilters.Add B59
+applFilters.Add EBA
+applFilters.Add EBD
+applFilters.Add EBC
+applFilters.Add EBE
+applFilters.Add H3L
+applFilters.Add J7Y
+applFilters.Add KWY
+applFilters.Add GAC
+applFilters.Add GRX
+applFilters.Add CH3
+'-----------------------
+' Add filter for package statuses
+'-----------------------
+'Dim app
+'app = cmanInst.Item(0).GetApplication(B59)
+'Set apps() = thisCman.GetApplications()
+'Dim apps() As ZosApplication = thisCman.GetApplications()
+'-----------------------
+' Add the DPlex server
+'-----------------------
+nameDPlex = DPlex
+descriptionDPlex = DPlex
+Set servers = network.Servers
+servers.Add nameDPlex, td01.ubs.ch, 7900, 1047,descriptionDPlex, 6
+'---------------------
+' Add the EPlex server
+'---------------------
+nameEPlex = EPlex
+descriptionEPlex = EPlex
+Set servers = network.Servers
+servers.Add nameEPlex, eplex1-cmani.appl.ubs.ch, 7900, 1047,descriptionEPlex, 6
+'---------------------
+' Remove the default MVS5, SYST and Tr02 servers
+'---------------------
+servers.Remove MVS5
+servers.Remove SYST
+servers.Remove Tr02
+'-----------------------
+' End of script
+'-----------------------

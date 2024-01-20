@@ -1,0 +1,16 @@
+{
+"companyName": "dGames",
+"productName": "AscensionAdventure",
+"productVersion": "0.2",
+"dataUrl": "webGLtest.data.unityweb",
+"wasmCodeUrl": "webGLtest.wasm.code.unityweb",
+"wasmFrameworkUrl": "webGLtest.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": true,
+"multithreading": false,
+"unityVersion": "2019.4.18f1"
+}
